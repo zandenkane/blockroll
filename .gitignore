@@ -1,0 +1,46 @@
+# Build output
+blockroll-server
+blockroll-server.exe
+blockroll-cli
+blockroll-cli.exe
+
+# SQLite database and WAL files
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Test and coverage
+coverage.out
+coverage.html
+*.test
+*.test.exe
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Go workspace (if used)
+go.work
+go.work.sum
+
+# Logs
+*.log
+
+# Vendor (if used)
+vendor/
