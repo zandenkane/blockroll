@@ -1,0 +1,25 @@
+{{define "content"}}
+<h1>Welcome to blockroll</h1>
+<p>A privacy tiered neighborhood mutual aid registry.</p>
+
+<div class="card">
+    <h2>Get started</h2>
+    <p>Create or join a neighborhood, then list skills and resources you can share with your neighbors.</p>
+    <p>You control who sees each listing with four trust tiers: Public, Neighbor, Trusted, and Inner Circle.</p>
+    <p><a href="/neighborhoods" class="btn">Manage neighborhoods</a></p>
+</div>
+
+{{if .Neighborhoods}}
+<h2>Your neighborhoods</h2>
+{{range .Neighborhoods}}
+<div class="card">
+    <h3>{{.Name}}</h3>
+    <p>Join code: <code>{{.JoinCode}}</code></p>
+    <div class="card-actions">
+        <a href="/neighborhoods/{{.ID}}/listings" class="btn">Listings</a>
+        <a href="/neighborhoods/{{.ID}}/trust" class="btn btn-secondary">Trust</a>
+    </div>
+</div>
+{{end}}
+{{end}}
+{{end}}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - blockroll</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <main class="container auth-page">
+        <h1>blockroll</h1>
+        <div class="card">
+            <h2>Register</h2>
+            {{if .Error}}<p class="error">{{.Error}}</p>{{end}}
+            <form method="POST" action="/register">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required autofocus>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required minlength="8">
+                <button type="submit" class="btn">Create account</button>
+            </form>
+            <p class="auth-alt">Already have an account? <a href="/login">Log in</a></p>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{{template "layout" .}}
+{{define "content"}}
+<h1>Neighborhoods</h1>
+
+{{if .Error}}<p class="error">{{.Error}}</p>{{end}}
+{{if .Success}}<p class="success">{{.Success}}</p>{{end}}
+
+<div class="grid">
+    <div class="card">
+        <h2>Create a neighborhood</h2>
+        <form method="POST" action="/neighborhoods/create">
+            <label for="name">Neighborhood name</label>
+            <input type="text" id="name" name="name" required placeholder="e.g. Elm Street Block">
+            <button type="submit" class="btn">Create</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Join a neighborhood</h2>
+        <form method="POST" action="/neighborhoods/join">
+            <label for="code">Join code</label>
+            <input type="text" id="code" name="code" required placeholder="e.g. ABC123" maxlength="6" style="text-transform: uppercase;">
+            <button type="submit" class="btn">Join</button>
+        </form>
+    </div>
+</div>
+
+{{if .Neighborhoods}}
+<h2>Your neighborhoods</h2>
+{{range .Neighborhoods}}
+<div class="card">
+    <h3>{{.Name}}</h3>
+    <p>Join code: <code>{{.JoinCode}}</code> (share this with neighbors to let them join)</p>
+    <div class="card-actions">
+        <a href="/neighborhoods/{{.ID}}/listings" class="btn">View listings</a>
+        <a href="/neighborhoods/{{.ID}}/trust" class="btn btn-secondary">Manage trust</a>
+    </div>
+</div>
+{{end}}
+{{end}}
+{{end}}

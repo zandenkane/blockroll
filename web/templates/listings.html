@@ -1,0 +1,84 @@
+{{template "layout" .}}
+{{define "content"}}
+<h1>Listings: {{.NeighborhoodName}}</h1>
+<p><a href="/neighborhoods">&larr; Back to neighborhoods</a></p>
+
+{{if .Error}}<p class="error">{{.Error}}</p>{{end}}
+{{if .Success}}<p class="success">{{.Success}}</p>{{end}}
+
+<div class="card">
+    <h2>Add a listing</h2>
+    <form method="POST" action="/neighborhoods/{{.NeighborhoodID}}/listings">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" required placeholder="e.g. 16 inch chainsaw">
+
+        <label for="description">Description (optional)</label>
+        <textarea id="description" name="description" rows="3" placeholder="Details about availability, condition, etc."></textarea>
+
+        <label for="category">Category</label>
+        <select id="category" name="category">
+            <option value="skill">Skill</option>
+            <option value="tool">Tool</option>
+            <option value="food">Food</option>
+            <option value="other" selected>Other</option>
+        </select>
+
+        <label for="min_tier">Minimum trust tier</label>
+        <select id="min_tier" name="min_tier">
+            <option value="0">Public (anyone in the neighborhood)</option>
+            <option value="1" selected>Neighbor (tier 1)</option>
+            <option value="2">Trusted (tier 2)</option>
+            <option value="3">Inner Circle (tier 3)</option>
+        </select>
+
+        <button type="submit" class="btn">Add listing</button>
+    </form>
+</div>
+
+{{if .MyListings}}
+<h2>Your listings</h2>
+{{range .MyListings}}
+<div class="card listing-card">
+    <div class="listing-header">
+        <span class="badge badge-{{.Category}}">{{.Category}}</span>
+        <strong>{{.Title}}</strong>
+        <span class="badge badge-tier">tier {{.MinTier}}</span>
+    </div>
+    {{if .Description}}<p>{{.Description}}</p>{{end}}
+    <div class="card-actions">
+        <form method="POST" action="/neighborhoods/{{$.NeighborhoodID}}/listings/{{.ID}}/edit" style="display:inline;">
+            <input type="hidden" name="title" value="{{.Title}}">
+            <input type="hidden" name="description" value="{{.Description}}">
+            <input type="hidden" name="category" value="{{.Category}}">
+            <label>Tier: <select name="min_tier" onchange="this.form.submit()">
+                <option value="0" {{if eq .MinTier 0}}selected{{end}}>Public</option>
+                <option value="1" {{if eq .MinTier 1}}selected{{end}}>Neighbor</option>
+                <option value="2" {{if eq .MinTier 2}}selected{{end}}>Trusted</option>
+                <option value="3" {{if eq .MinTier 3}}selected{{end}}>Inner Circle</option>
+            </select></label>
+        </form>
+        <form method="POST" action="/neighborhoods/{{$.NeighborhoodID}}/listings/{{.ID}}/delete" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-small">Delete</button>
+        </form>
+    </div>
+</div>
+{{end}}
+{{end}}
+
+{{if .Listings}}
+<h2>Neighborhood listings</h2>
+{{range .Listings}}
+<div class="card listing-card">
+    <div class="listing-header">
+        <span class="badge badge-{{.Category}}">{{.Category}}</span>
+        <strong>{{.Title}}</strong>
+        <span class="badge badge-tier">tier {{.MinTier}}</span>
+        <span class="listing-owner">by {{.OwnerEmail}}</span>
+    </div>
+    {{if .Description}}<p>{{.Description}}</p>{{end}}
+</div>
+{{end}}
+{{else}}
+<p>No listings visible to you in this neighborhood yet.</p>
+{{end}}
+{{end}}

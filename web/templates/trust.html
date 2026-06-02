@@ -1,0 +1,46 @@
+{{template "layout" .}}
+{{define "content"}}
+<h1>Trust: {{.NeighborhoodName}}</h1>
+<p><a href="/neighborhoods">&larr; Back to neighborhoods</a></p>
+<p><a href="/neighborhoods/{{.NeighborhoodID}}/listings">View listings</a></p>
+
+{{if .Error}}<p class="error">{{.Error}}</p>{{end}}
+{{if .Success}}<p class="success">{{.Success}}</p>{{end}}
+
+<div class="card">
+    <h2>How trust tiers work</h2>
+    <p>You assign a trust tier to each neighbor. This controls which of your listings they can see.</p>
+    <table class="tier-table">
+        <tr><th>Tier</th><th>Name</th><th>Sees</th></tr>
+        <tr><td>0</td><td>Public</td><td>Your tier 0 listings</td></tr>
+        <tr><td>1</td><td>Neighbor</td><td>Tier 0 + 1 listings</td></tr>
+        <tr><td>2</td><td>Trusted</td><td>Tier 0 + 1 + 2 listings</td></tr>
+        <tr><td>3</td><td>Inner Circle</td><td>All your listings</td></tr>
+    </table>
+    <p>Members with no trust assignment can only see your tier 0 (public) listings.</p>
+</div>
+
+{{if .Members}}
+<h2>Neighborhood members</h2>
+{{range .Members}}
+<div class="card">
+    <div class="trust-row">
+        <span class="trust-email">{{.Email}}</span>
+        <span class="badge badge-tier">Current: {{.TierName}}</span>
+        <form method="POST" action="/neighborhoods/{{$.NeighborhoodID}}/trust" class="trust-form">
+            <input type="hidden" name="neighbor_id" value="{{.ID}}">
+            <select name="tier">
+                <option value="0" {{if eq .Tier 0}}selected{{end}}>Public (0)</option>
+                <option value="1" {{if eq .Tier 1}}selected{{end}}>Neighbor (1)</option>
+                <option value="2" {{if eq .Tier 2}}selected{{end}}>Trusted (2)</option>
+                <option value="3" {{if eq .Tier 3}}selected{{end}}>Inner Circle (3)</option>
+            </select>
+            <button type="submit" class="btn btn-small">Update</button>
+        </form>
+    </div>
+</div>
+{{end}}
+{{else}}
+<p>No other members in this neighborhood yet. Share the join code to invite neighbors.</p>
+{{end}}
+{{end}}
