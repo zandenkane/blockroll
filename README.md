@@ -28,6 +28,12 @@ Trust is one way. You set a tier for each neighbor independently. If you trust s
 If nobody has set a trust level for you yet, you only see their public (tier 0) stuff.
 
 
+
+<p align="center">
+  <img src="assets/tiers.png" alt="trust tier system" width="90%">
+</p>
+
+
 ## how trust tiers work
 
 ```mermaid
