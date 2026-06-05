@@ -1,6 +1,12 @@
-# blockroll
+<p align="center">
+  <img src="assets/banner.png" alt="blockroll" width="100%">
+</p>
 
-![CI](https://github.com/zandenkane/blockroll/actions/workflows/ci.yml/badge.svg)
+<p align="center">
+  <a href="https://github.com/zandenkane/blockroll/actions/workflows/ci.yml"><img src="https://github.com/zandenkane/blockroll/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <img src="https://img.shields.io/badge/go-00ADD8?style=flat&logo=go&logoColor=white" alt="go">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License">
+</p>
 
 nextdoor but without the part where a corporation owns all your data and your neighbor Karen can see your entire profile.
 
