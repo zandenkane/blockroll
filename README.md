@@ -21,6 +21,34 @@ Trust is one way. You set a tier for each neighbor independently. If you trust s
 
 If nobody has set a trust level for you yet, you only see their public (tier 0) stuff.
 
+
+## how trust tiers work
+
+```mermaid
+graph TD
+    A[Stranger - sees nothing] --> B[Neighbor - sees tier 1 listings]
+    B --> C[Trusted - sees tier 1 + 2]
+    C --> D[Inner circle - sees everything]
+
+    style A fill:#ff6b6b
+    style B fill:#ffd43b
+    style C fill:#69db7c
+    style D fill:#51cf66
+```
+
+```
+$ curl localhost:8080/api/listings?viewer=sam
+
+[
+  {"item": "lawnmower", "owner": "alex", "tier": 1},
+  {"item": "stand mixer", "owner": "jordan", "tier": 1},
+  {"item": "chest freezer", "owner": "alex", "tier": 2}
+]
+
+# sam is "trusted" by alex (tier 2) so sees the freezer
+# sam is only "neighbor" to jordan (tier 1) so only sees the mixer
+```
+
 ## What you need
 
 - Go 1.22 or newer ([go.dev/dl](https://go.dev/dl/))
