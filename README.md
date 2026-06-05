@@ -2,9 +2,9 @@
 
 ![CI](https://github.com/zandenkane/blockroll/actions/workflows/ci.yml/badge.svg)
 
-So here's the thing. A few of us on the block wanted a way to share stuff. Lawnmower, baking skills, that extra chest freezer in the garage. But nobody wanted to post it on Facebook or Nextdoor where the whole internet can see. We needed something where you get to decide who sees what, and the data stays with us.
+nextdoor but without the part where a corporation owns all your data and your neighbor Karen can see your entire profile.
 
-That's blockroll. It's a single Go binary that runs a little web app for your neighborhood. People register, form a neighborhood group with a join code, and list the things they can share. The twist is the trust tier system: you decide, person by person, how much of your inventory someone gets to see.
+blockroll is a single Go binary that runs a web app for your neighborhood. people register with a join code, list skills and stuff they can share (lawnmower, baking, that projector nobody uses), and control exactly who sees what through trust tiers. you decide per person how much of your inventory is visible. no app store, no subscription, no data harvesting.
 
 ## How it works
 
